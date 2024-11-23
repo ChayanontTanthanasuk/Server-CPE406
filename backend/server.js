@@ -15,11 +15,11 @@ app.use(morgan('dev'))
 app.use(bodyParse.json({ limit: '10mb' }));
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // หรือที่อยู่ที่ frontend รันอยู่
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type']
- };
-  app.use(cors(corsOptions));
+    origin: 'http://localhost:3001', // หรือที่อยู่ของ React
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // กำหนด HTTP Methods ที่อนุญาต
+    allowedHeaders: ['Content-Type', 'Authorization'] // กำหนด Headers ที่อนุญาต
+};
+app.use(cors(corsOptions)); // ใช้ middleware cors
 
 
 readdirSync('./Routes/').map((a) => {
@@ -27,5 +27,5 @@ readdirSync('./Routes/').map((a) => {
 });
 
 app.listen(3000, () =>{
-    console.log("Server Running on port 4000");
+    console.log("Server Running on port 3000");
 }) 
