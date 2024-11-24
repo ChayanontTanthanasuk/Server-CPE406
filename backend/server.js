@@ -1,31 +1,34 @@
 const express = require('express');
 const { readdirSync } = require('fs');
-
 const morgan = require('morgan');
 const cors = require('cors');
-const bodyParse = require('body-parser')
-const connectDB = require('./Config/db')
+const bodyParser = require('body-parser');
+const connectDB = require('./Config/db');
+require('./Services/mqttService'); // เรียกใช้งาน MQTT Service
 
 const app = express();
-connectDB()
 
+// เชื่อมต่อฐานข้อมูล
+connectDB();
 
-app.use(morgan('dev'))
-
-app.use(bodyParse.json({ limit: '10mb' }));
+// Middleware
+app.use(morgan('dev'));
+app.use(bodyParser.json({ limit: '10mb' }));
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // หรือที่อยู่ของ React
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // กำหนด HTTP Methods ที่อนุญาต
-    allowedHeaders: ['Content-Type', 'Authorization'] // กำหนด Headers ที่อนุญาต
+    origin: 'http://localhost:3000', // URL ของ Frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Methods ที่อนุญาต
+    allowedHeaders: ['Content-Type', 'Authorization'], // Headers ที่อนุญาต
 };
-app.use(cors(corsOptions)); // ใช้ middleware cors
+app.use(cors(corsOptions)); // เปิดใช้งาน CORS
 
-
-readdirSync('./Routes/').map((a) => {
-    app.use('/api', require('./Routes/' + a))
+// โหลด routes ทั้งหมดจากโฟลเดอร์ Routes
+readdirSync('./Routes/').map((route) => {
+    app.use('/api', require(`./Routes/${route}`));
 });
 
-app.listen(4000, () =>{
-    console.log("Server Running on port 4000");
-}) 
+// เริ่มต้น Server
+const PORT = 4000;
+app.listen(PORT, () => {
+    console.log(`Server Running on port ${PORT}`);
+});

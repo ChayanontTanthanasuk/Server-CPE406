@@ -1,10 +1,22 @@
 const mongoose = require('mongoose');
 
-const tempSchema = mongoose.Schema(
+const temperatureSchema = new mongoose.Schema(
     {
-        Temp: { type: Number, required: true }
+        topic: {
+            type: String,
+            required: true,
+        },
+        message: {
+            type: String,
+            required: true,
+        },
+        receivedAt: {
+            type: Date,
+            default: Date.now,
+        },
     },
-    { timestamps: true }
+    { timestamps: true } // สร้าง createdAt และ updatedAt อัตโนมัติ
 );
 
-module.exports = mongoose.model('temperature', tempSchema);
+module.exports = mongoose.model('Temperature', temperatureSchema);
+
