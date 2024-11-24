@@ -15,7 +15,7 @@ app.use(morgan('dev'))
 app.use(bodyParse.json({ limit: '10mb' }));
 
 const corsOptions = {
-    origin: 'http://localhost:3001', // หรือที่อยู่ของ React
+    origin: 'http://localhost:3000', // หรือที่อยู่ของ React
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // กำหนด HTTP Methods ที่อนุญาต
     allowedHeaders: ['Content-Type', 'Authorization'] // กำหนด Headers ที่อนุญาต
 };
@@ -26,6 +26,6 @@ readdirSync('./Routes/').map((a) => {
     app.use('/api', require('./Routes/' + a))
 });
 
-app.listen(3000, () =>{
-    console.log("Server Running on port 3000");
+app.listen(4000, () =>{
+    console.log("Server Running on port 4000");
 }) 

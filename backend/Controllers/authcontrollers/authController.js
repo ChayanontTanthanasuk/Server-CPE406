@@ -15,19 +15,6 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-
-exports.AddUser = async (req, res) => {
-  try {
-    const adduser = new User(req.body);
-    await adduser.save();
-    res.send('AddUser Complete');
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('AddUser Error');
-  }
-}
-
-
 exports.register = async (req, res) => {
   try {
     // CheckUser
@@ -65,7 +52,7 @@ exports.login = async (req, res) => {
     const { name, password } = req.body
     var CheckUser = await User.findOne({ name }); // ใช้ findOne แทน findOneAndUpdate
 
-    console.log(CheckUser)
+    // console.log(CheckUser)
     if (CheckUser) {
       const isMatch = await bcrypt.compare(password, CheckUser.password)
       if (!isMatch) {
@@ -81,6 +68,7 @@ exports.login = async (req, res) => {
       jwt.sign(payload, 'jwtsecret', { expiresIn: '1h' }, (err, token) => {
         if (err) throw err;
         res.json({ token, payload });
+        console.log('login complete')
       });      
     } else{
       return res.status(400).send('User not Found!!')

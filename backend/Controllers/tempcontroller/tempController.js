@@ -1,7 +1,7 @@
-const products = require('../../Models/temperature/productModel')
+const products = require('../../Models/temperature/temperature')
 
 // post done
-exports.product = async (req, res) => {
+exports.timp = async (req, res) => {
   try {
       const producted = new products(req.body);
       await producted.save();
