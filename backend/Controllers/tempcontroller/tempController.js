@@ -1,4 +1,4 @@
-const products = require('../../Models/temperature/temperature')
+const products = require('../../Models/healthData/healthData')
 
 // post done
 exports.timp = async (req, res) => {
