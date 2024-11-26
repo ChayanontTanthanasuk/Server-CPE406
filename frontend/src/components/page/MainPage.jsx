@@ -36,6 +36,12 @@ const MainPage = () => {
                 ตรวจสุขภาพ
               </button>
             </Link>
+            <Link to="/RegisterPage">
+              <button className="bg-[#139BC9] text-white px-4 py-2 rounded-[40px] hover:bg-slate-500">
+                Logout
+              </button>
+              </Link>
+
           </div>
         </div>
 

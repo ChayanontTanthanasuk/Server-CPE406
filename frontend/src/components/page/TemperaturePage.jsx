@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
+import { Link } from "react-router-dom"
 
 const SOCKET_SERVER_URL = "http://localhost:4000"; // URL ของ Backend Server
 
@@ -50,10 +51,15 @@ const MQTTDataViewer = () => {
   return (
     <div className={`min-h-screen ${isDarkMode ? "bg-gray-900" : "bg-white"} p-8 transition-all`}>
       {/* Header */}
-      <div className={`flex justify-between items-center bg-gradient-to-r ${isDarkMode ? "from-gray-800 via-gray-900 to-black" : "from-blue-500 via-blue-600 to-blue-700"} text-white py-6 px-8 rounded-lg shadow-lg mb-8`}>
+      <div className={`flex justify-between items-center bg-gradient-to-r ${isDarkMode ? "from-gray-800 via-gray-900 to-black" : "from-[#139BC9] to-gray-300"} text-white py-6 px-8 rounded-lg shadow-lg mb-8`}>
+      <Link to="/MainPage">
+          <button className="font-bold bg-gray-600 text-white rounded-lg px-6 py-2 ">MainPage</button>
+        </Link>
+
+        
         <div>
-        <h1 className="text-3xl font-bold">Health Monitoring Dashboard</h1>
-<p className="text-sm opacity-80">Track live health metrics like temperature and heart rate in real-time.</p>
+          <h1 className="text-3xl font-bold">Health Monitoring Dashboard</h1>
+          <p className="text-sm opacity-80">Track live health metrics like temperature and heart rate in real-time.</p>
 
         </div>
         {/* Switch for toggling dark mode */}

@@ -23,7 +23,7 @@ const AuthForm = () => {
       const res = await axios.post('http://localhost:4000/api/login', { name, password });
       localStorage.setItem('authToken', res.data.token); // เก็บ Token
       setMessage(''); // เคลียร์ข้อความ
-      navigate('/welcome'); // เปลี่ยนไปหน้า Welcome
+      navigate('/MainPage'); // เปลี่ยนไปหน้า Welcome
     } catch (err) {
       if (err.response?.status === 404) {
         setMessage('User not found');

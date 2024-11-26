@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios'; // ใช้ axios เพื่อเรียก Backend
 import { useNavigate } from 'react-router-dom'; // นำเข้า useNavigate
 import './AuthForm.css';
+import MainPage from '../MainPage';
 
 const AuthForm = () => {
   const [isSignIn, setIsSignIn] = useState(true); // ใช้เพื่อสลับระหว่าง Sign in และ Sign up
@@ -23,7 +24,7 @@ const AuthForm = () => {
       const res = await axios.post('http://localhost:4000/api/login', { name, password });
       localStorage.setItem('authToken', res.data.token); // เก็บ Token
       setMessage(''); // เคลียร์ข้อความ
-      navigate('/welcome'); // เปลี่ยนไปหน้า Welcome
+      navigate('/MainPage'); // เปลี่ยนไปหน้า MainPage
     } catch (err) {
       if (err.response?.status === 404) {
         setMessage('User not found');
@@ -34,6 +35,7 @@ const AuthForm = () => {
       }
     }
   };
+  
 
   // ฟังก์ชันจัดการการสมัครสมาชิก
   const handleSignup = async (e) => {
